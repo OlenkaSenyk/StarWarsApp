@@ -26,7 +26,7 @@ export const CharacterDetails = ({ onClose, character }) => {
         <div className="fixed inset-0 z-10 flex items-center justify-center p-4 bg-gray-500 bg-opacity-75">
             {
                 homeworld !== null ? (
-                    <div className="p-6 max-w-lg rounded-lg bg-white">
+                    <div className="p-6 min-w-80 max-w-lg rounded-lg bg-white">
                         <h2 className="text-2xl font-semibold text-gray-900 text-center">
                             {character.name}
                         </h2>
