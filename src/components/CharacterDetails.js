@@ -31,8 +31,12 @@ export const CharacterDetails = ({ onClose, character }) => {
                             {character.name}
                         </h2>
                         <div className="grid md:grid-cols-2 gap-x-6">
-                            <p className="mt-2 text-gray-500">Height: {character.height / 100} m</p>
-                            <p className="mt-2 text-gray-500">Mass: {character.mass}</p>
+                            <p className="mt-2 text-gray-500">
+                                Height: {isNaN(character.height / 100) ? 'unknown' : `${character.height / 100} m`}
+                            </p>
+                            <p className="mt-2 text-gray-500">
+                                Mass: {character.mass !== 'unknown' ? `${character.mass} kg` : "unknown"}
+                            </p>
                             <p className="mt-2 text-gray-500">Added: {createdDate}</p>
                             <p className="mt-2 text-gray-500">Films: {character.films.length}</p>
                             <p className="mt-2 text-gray-500">Birth year: {character.birth_year}</p>
