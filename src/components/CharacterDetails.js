@@ -10,8 +10,13 @@ export const CharacterDetails = ({ onClose, character }) => {
 
     useEffect(() => {
         const fetchHomeworld = async () => {
-            const response = await GetCharacterDetails(character.homeworld);
-            setHomeworld(response);
+            try {
+                const response = await GetCharacterDetails(character.homeworld);
+                setHomeworld(response);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                alert("Error fetching data. Try later, please")
+            }
         };
 
         fetchHomeworld();

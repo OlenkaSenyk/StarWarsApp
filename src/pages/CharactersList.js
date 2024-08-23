@@ -14,29 +14,32 @@ export default function CharactersList() {
     const [speciesColors, setSpeciesColors] = useState({});
 
     const fetchSpeciesAndColors = async () => {
-        let species = [];
-        let pageNum = 1;
+        try {
+            let species = [];
+            let pageNum = 1;
 
-        while (true) {
-            const response = await GetSpecies(pageNum);
-            if (!response)
-                break;
+            while (true) {
+                const response = await GetSpecies(pageNum);
+                if (!response) break;
 
-            species = [...species, ...response.results.map(s => s.name)];
-            if (!response.next)
-                break;
+                species = [...species, ...response.results.map(s => s.name)];
+                if (!response.next) break;
 
-            pageNum++;
-        }
-
-        const colors = species.reduce((acc, species) => {
-            if (!acc[species]) {
-                acc[species] = getRandomColor();
+                pageNum++;
             }
-            return acc;
-        }, {});
 
-        setSpeciesColors(colors);
+            const colors = species.reduce((acc, species) => {
+                if (!acc[species]) {
+                    acc[species] = getRandomColor();
+                }
+                return acc;
+            }, {});
+
+            setSpeciesColors(colors);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            alert("Error fetching data. Try later, please");
+        }
     };
 
     const fetchData = async () => {
@@ -45,7 +48,8 @@ export default function CharactersList() {
         try {
             const response = await GetCharacters(page);
             if (!response) {
-                throw new Error("Failed to fetch characters");
+                console.error('Error fetching data');
+                alert("Error fetching data. Try later, please")
             }
 
             const results = await Promise.all(
@@ -60,8 +64,9 @@ export default function CharactersList() {
 
             setCharactersList({ ...response, results });
             setLoading(false);
-        } catch (err) {
-            throw new Error(`Error: ${err.message}`);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            alert("Error fetching data. Try later, please")
         }
     };
 
