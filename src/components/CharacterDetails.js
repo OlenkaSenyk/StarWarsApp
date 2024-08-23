@@ -50,7 +50,7 @@ export const CharacterDetails = ({ onClose, character }) => {
                                 className="w-full sm:w-auto bg-white text-sm text-gray-900 px-3 py-2 font-semibold rounded-md
                         border-2 border-gray-300 hover:bg-gray-100"
                             >
-                                Cancel
+                                Close
                             </button>
                         </div>
                     </div>
